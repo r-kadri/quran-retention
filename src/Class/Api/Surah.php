@@ -7,6 +7,7 @@ namespace App\Class\Api;
  */
 final class Surah
 {
+    private int $number;
     private RevelationPlace $revelationPlace;
     private string $simpleName;
     private string $arabicName;
@@ -15,12 +16,18 @@ final class Surah
     public static function createFromApiResponse(array $apiResponse): self
     {
         $surah = new self();
+        $surah->number = $apiResponse['id'];
         $surah->revelationPlace = RevelationPlace::from($apiResponse['revelation_place']);
         $surah->simpleName = $apiResponse['name_simple'];
         $surah->arabicName = $apiResponse['name_arabic'];
         $surah->versesCount = $apiResponse['verses_count'];
 
         return $surah;
+    }
+
+    public function getNumber(): int
+    {
+        return $this->number;
     }
 
     public function getRevelationPlace(): RevelationPlace
