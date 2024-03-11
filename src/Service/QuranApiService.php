@@ -33,7 +33,6 @@ final class QuranApiService
         )->toArray()['chapters'];
 
         foreach ($surahInfos as $infos) {
-            dd($infos);
             $surahs[] = Surah::createFromApiResponse($infos);
         }
 
