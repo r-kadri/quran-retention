@@ -13,14 +13,19 @@ final class Surah
     private string $arabicName;
     private int $versesCount;
 
+    /**
+     * Create a Surah from the API response.
+     *
+     * @param string[] $apiResponse
+     */
     public static function createFromApiResponse(array $apiResponse): self
     {
         $surah = new self();
-        $surah->number = $apiResponse['id'];
+        $surah->number = (int) $apiResponse['id'];
         $surah->revelationPlace = RevelationPlace::from($apiResponse['revelation_place']);
         $surah->simpleName = $apiResponse['name_simple'];
         $surah->arabicName = $apiResponse['name_arabic'];
-        $surah->versesCount = $apiResponse['verses_count'];
+        $surah->versesCount = (int) $apiResponse['verses_count'];
 
         return $surah;
     }
