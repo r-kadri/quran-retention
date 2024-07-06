@@ -21,7 +21,7 @@ final class QuranApiService
 
     /**
      * Get all surahs from the Quran API
-     * 
+     *
      * @return Surah[]
      */
     public function getAllSurahs(): array
@@ -40,8 +40,8 @@ final class QuranApiService
 
     /**
      * Get a specific surah from the Quran API
-     * 
-     * @return Surah
+     *
+     * @param int $number
      */
     public function getSurah(int $number): Surah
     {
@@ -54,12 +54,14 @@ final class QuranApiService
 
     /**
      * Make a GET request to the Quran API
+     *
+     * @param string $endpoint
+     * @param string[] $query
      */
     private function getRequest(
         string $endpoint,
         array $query = []
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         return $this->httpClient->request(
             Request::METHOD_GET,
             $this->QURAN_API_BASE_URL . $endpoint,
