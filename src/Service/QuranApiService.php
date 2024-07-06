@@ -24,12 +24,11 @@ final class QuranApiService
      * 
      * @return Surah[]
      */
-    public function getAllSurahs(string $language = 'en'): array
+    public function getAllSurahs(): array
     {
         $surahs = [];
         $surahInfos = $this->getRequest(
-            'chapters',
-            ['language' => $language]
+            'chapters'
         )->toArray()['chapters'];
 
         foreach ($surahInfos as $infos) {
@@ -37,6 +36,20 @@ final class QuranApiService
         }
 
         return $surahs;
+    }
+
+    /**
+     * Get a specific surah from the Quran API
+     * 
+     * @return Surah
+     */
+    public function getSurah(int $number): Surah
+    {
+        $surahInfos = $this->getRequest(
+            'chapters/' . $number,
+        )->toArray()['chapter'];
+
+        return Surah::createFromApiResponse($surahInfos);
     }
 
     /**
